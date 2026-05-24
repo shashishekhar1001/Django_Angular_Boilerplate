@@ -1,0 +1,278 @@
+/* ============================================
+   Apple Design System — Design Tokens
+   Source: design.md — Apple's web presence analysis
+   ============================================ */
+
+:root {
+  /* ─── Colors: Brand & Accent ─── */
+  --color-primary: #0066cc;                 /* Action Blue — single brand interactive color */
+  --color-primary-focus: #0071e3;            /* Focus Blue — keyboard focus ring */
+  --color-primary-on-dark: #2997ff;          /* Sky Link Blue — inline links on dark tiles */
+
+  /* ─── Colors: Surface ─── */
+  --color-canvas: #ffffff;                   /* Pure White — dominant canvas */
+  --color-canvas-parchment: #f5f5f7;         /* Parchment — alternating off-white */
+  --color-surface-pearl: #fafafc;            /* Pearl Button — near-white ghost button fill */
+  --color-surface-tile-1: #272729;           /* Near-Black Tile 1 — primary dark tile */
+  --color-surface-tile-2: #2a2a2c;           /* Near-Black Tile 2 — micro-step lighter */
+  --color-surface-tile-3: #252527;           /* Near-Black Tile 3 — micro-step darker */
+  --color-surface-black: #000000;            /* Pure Black — global nav, video player */
+  --color-surface-chip-translucent: rgba(210, 210, 215, 0.64); /* Translucent chip gray */
+
+  /* ─── Colors: Text ─── */
+  --color-ink: #1d1d1f;                      /* Near-Black Ink — headlines & body on light */
+  --color-body: #1d1d1f;                     /* Body — same hex as ink */
+  --color-body-on-dark: #ffffff;             /* Body On Dark — text on dark tiles */
+  --color-body-muted: #cccccc;               /* Body Muted — secondary copy on dark */
+  --color-ink-muted-80: #333333;             /* Ink Muted 80 — body on pearl button */
+  --color-ink-muted-48: #7a7a7a;             /* Ink Muted 48 — disabled, fine-print */
+
+  /* ─── Colors: Hairlines & Borders ─── */
+  --color-divider-soft: #f0f0f0;             /* Divider Soft — ring shadow on buttons */
+  --color-hairline: #e0e0e0;                 /* Hairline — store utility card borders */
+
+  /* ─── Typography: Font Families ─── */
+  --font-display: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-body: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+
+  /* ─── Typography: Size / Weight / Line-Height / Letter-Spacing ─── */
+  /* Hero display — 56px, 600, 1.07, -0.28px */
+  --text-hero-display-size: 56px;
+  --text-hero-display-weight: 600;
+  --text-hero-display-line: 1.07;
+  --text-hero-display-tracking: -0.28px;
+
+  /* Display lg — 40px, 600, 1.10, 0 */
+  --text-display-lg-size: 40px;
+  --text-display-lg-weight: 600;
+  --text-display-lg-line: 1.10;
+  --text-display-lg-tracking: 0px;
+
+  /* Display md — 34px, 600, 1.47, -0.374px */
+  --text-display-md-size: 34px;
+  --text-display-md-weight: 600;
+  --text-display-md-line: 1.47;
+  --text-display-md-tracking: -0.374px;
+
+  /* Lead — 28px, 400, 1.14, 0.196px */
+  --text-lead-size: 28px;
+  --text-lead-weight: 400;
+  --text-lead-line: 1.14;
+  --text-lead-tracking: 0.196px;
+
+  /* Lead Airy — 24px, 300, 1.5, 0 */
+  --text-lead-airy-size: 24px;
+  --text-lead-airy-weight: 300;
+  --text-lead-airy-line: 1.5;
+  --text-lead-airy-tracking: 0px;
+
+  /* Tagline — 21px, 600, 1.19, 0.231px (or 700) */
+  --text-tagline-size: 21px;
+  --text-tagline-weight: 700;
+  --text-tagline-line: 1.19;
+  --text-tagline-tracking: 0.231px;
+
+  /* Body Strong — 17px, 600, 1.24, -0.374px */
+  --text-body-strong-size: 17px;
+  --text-body-strong-weight: 600;
+  --text-body-strong-line: 1.24;
+  --text-body-strong-tracking: -0.374px;
+
+  /* Body — 17px, 400, 1.47, -0.374px */
+  --text-body-size: 17px;
+  --text-body-weight: 400;
+  --text-body-line: 1.47;
+  --text-body-tracking: -0.374px;
+
+  /* Dense Link — 17px, 400, 2.41, 0 */
+  --text-dense-link-size: 17px;
+  --text-dense-link-weight: 400;
+  --text-dense-link-line: 2.41;
+  --text-dense-link-tracking: 0px;
+
+  /* Caption — 14px, 400, 1.43, -0.224px */
+  --text-caption-size: 14px;
+  --text-caption-weight: 400;
+  --text-caption-line: 1.43;
+  --text-caption-tracking: -0.224px;
+
+  /* Caption Strong — 14px, 600, 1.29, -0.224px */
+  --text-caption-strong-size: 14px;
+  --text-caption-strong-weight: 600;
+  --text-caption-strong-line: 1.29;
+  --text-caption-strong-tracking: -0.224px;
+
+  /* Button Large — 18px, 300, 1.0, 0 */
+  --text-button-large-size: 18px;
+  --text-button-large-weight: 300;
+  --text-button-large-line: 1.0;
+  --text-button-large-tracking: 0px;
+
+  /* Button Utility — 14px, 400, 1.29, -0.224px */
+  --text-button-utility-size: 14px;
+  --text-button-utility-weight: 400;
+  --text-button-utility-line: 1.29;
+  --text-button-utility-tracking: -0.224px;
+
+  /* Fine Print — 12px, 400, 1.0, -0.12px */
+  --text-fine-print-size: 12px;
+  --text-fine-print-weight: 400;
+  --text-fine-print-line: 1.0;
+  --text-fine-print-tracking: -0.12px;
+
+  /* Micro Legal — 10px, 400, 1.3, -0.08px */
+  --text-micro-legal-size: 10px;
+  --text-micro-legal-weight: 400;
+  --text-micro-legal-line: 1.3;
+  --text-micro-legal-tracking: -0.08px;
+
+  /* Nav Link — 12px, 400, 1.0, -0.12px */
+  --text-nav-link-size: 12px;
+  --text-nav-link-weight: 400;
+  --text-nav-link-line: 1.0;
+  --text-nav-link-tracking: -0.12px;
+
+  /* ─── Spacing System (base unit: 8px) ─── */
+  --spacing-xxs: 4px;
+  --spacing-xs: 8px;
+  --spacing-sm: 12px;
+  --spacing-md: 17px;
+  --spacing-lg: 24px;
+  --spacing-xl: 32px;
+  --spacing-xxl: 48px;
+  --spacing-section: 80px;
+
+  /* ─── Border Radius ─── */
+  --rounded-none: 0px;
+  --rounded-xs: 5px;
+  --rounded-sm: 8px;
+  --rounded-md: 11px;
+  --rounded-lg: 18px;
+  --rounded-pill: 9999px;
+  --rounded-full: 50%;
+
+  /* ─── Elevation & Depth ─── */
+  --shadow-product: rgba(0, 0, 0, 0.22) 3px 5px 30px 0px;
+  --shadow-hairline: 0 0 0 1px rgba(0, 0, 0, 0.08);
+  --shadow-card: 0 2px 12px rgba(0, 0, 0, 0.06);
+  --shadow-none: none;
+
+  /* ─── Phase-In Token (for smooth transitions) ─── */
+  --theme-transition-duration: 0.3s;
+
+  /* ─── Backdrop Blur ─── */
+  --blur-frosted: saturate(180%) blur(20px);
+
+  /* ─── Component Sizes ─── */
+  --global-nav-height: 44px;
+  --sub-nav-height: 52px;
+  --button-primary-padding-v: 11px;
+  --button-primary-padding-h: 22px;
+  --button-dark-utility-padding-v: 8px;
+  --button-dark-utility-padding-h: 15px;
+  --button-pearl-padding-v: 8px;
+  --button-pearl-padding-h: 14px;
+  --button-icon-size: 44px;
+}
+
+/* ═══════════════════════════════════════
+   Dark Mode — override light tokens
+   ═══════════════════════════════════════ */
+.dark {
+  /* ─── Colors: Surface ─── */
+  --color-canvas: #121212;
+  --color-canvas-parchment: #1a1a1c;
+  --color-surface-pearl: #222224;
+
+  /* ─── Colors: Text ─── */
+  --color-ink: #f0f0f2;
+  --color-body: #e0e0e2;
+  --color-body-on-dark: #1d1d1f;
+  --color-ink-muted-80: #b0b0b2;
+  --color-ink-muted-48: #9e9ea0;
+
+  /* ─── Colors: Hairlines & Borders ─── */
+  --color-divider-soft: #2a2a2c;
+  --color-hairline: #333335;
+
+  /* ─── Elevation & Depth ─── */
+  --shadow-product: rgba(0, 0, 0, 0.5) 3px 5px 30px 0px;
+  --shadow-hairline: 0 0 0 1px rgba(255, 255, 255, 0.06);
+  --shadow-card: 0 2px 12px rgba(0, 0, 0, 0.3);
+}
+
+/* ─── Smooth theme transition on interactive elements ─── */
+html,
+body,
+.app-container,
+.sidebar,
+.main-content,
+.admin-page,
+.dashboard-content,
+.content-inner,
+.welcome-section,
+.stat-tile,
+.activity-card,
+.actions-card,
+.table-card,
+.form-card,
+.page-header,
+.admin-topbar,
+.topbar-title h1,
+.topbar-title p,
+.dash-card,
+.dash-card-body h3,
+.dash-card-body p,
+.search-input,
+.apple-input,
+.apple-input::placeholder,
+.p-paginator,
+.p-paginator .p-paginator-page,
+.p-paginator .p-paginator-first,
+.p-paginator .p-paginator-prev,
+.p-paginator .p-paginator-next,
+.p-paginator .p-paginator-last,
+.p-paginator .p-select,
+.p-paginator .p-select-label,
+.p-select-overlay,
+.p-select-option,
+.back-btn,
+.topbar-btn,
+.sidebar-toggle,
+.nav-item,
+.logo,
+.icon-btn,
+.btn-ghost,
+.user-name,
+.user-id,
+.email-cell,
+.role-name,
+.perm-name,
+.codename-tag,
+.role-tag,
+.status-tag,
+.btn-primary-sm,
+.btn-primary,
+.btn-danger,
+.toggle-track,
+.toggle-label,
+.form-field label,
+.form-section-title,
+.page-title,
+.page-subtitle,
+.section-headline,
+.section-subtitle,
+.section-badge,
+.section-title,
+.stat-value,
+.stat-label,
+.activity-title,
+.activity-time,
+.activity-empty,
+.loading-text,
+.error-text {
+  transition: background-color var(--theme-transition-duration) ease,
+              color var(--theme-transition-duration) ease,
+              border-color var(--theme-transition-duration) ease,
+              box-shadow var(--theme-transition-duration) ease;
+}

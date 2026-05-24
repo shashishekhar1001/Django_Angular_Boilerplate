@@ -1,0 +1,157 @@
+<div class="admin-layout">
+  <!-- Sidebar Toggle (Mobile) -->
+  <button class="sidebar-toggle" (click)="toggleSidebar()" [class.active]="sidebarOpen()" aria-label="Toggle sidebar">
+    <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+      @if (!sidebarOpen()) {
+        <path d="M2 4H16M2 9H16M2 14H16" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+      }
+      @if (sidebarOpen()) {
+        <path d="M4 4L14 14M14 4L4 14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+      }
+    </svg>
+  </button>
+
+  <!-- Sidebar Overlay (Mobile) -->
+  @if (sidebarOpen()) {
+    <div class="sidebar-overlay" (click)="closeSidebar()"></div>
+  }
+
+  <!-- Sidebar -->
+  <aside class="sidebar" [class.open]="sidebarOpen()">
+    <div class="sidebar-header">
+      <div class="logo">
+        <svg width="22" height="22" viewBox="0 0 22 22" fill="none">
+          <circle cx="11" cy="11" r="10" stroke="currentColor" stroke-width="1.5"/>
+          <circle cx="11" cy="11" r="4" stroke="currentColor" stroke-width="1.5"/>
+          <path d="M11 1V4M11 18V21M21 11H18M4 11H1M18 4L16 6M6 16L4 18M18 18L16 16M6 6L4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+        <span>Admin</span>
+      </div>
+    </div>
+
+    <nav class="sidebar-nav">
+      <a class="nav-item animate-nav-fade-in" routerLink="/admin" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" (click)="closeSidebar()">
+        <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+          <path d="M1 9L9 1L17 9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M3 7V16H15V7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <span>Dashboard</span>
+      </a>
+      <a class="nav-item animate-nav-fade-in" routerLink="/admin/users" routerLinkActive="active" (click)="closeSidebar()">
+        <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+          <path d="M13 15V13C13 11.8954 12.1046 11 11 11H4C2.89543 11 2 11.8954 2 13V15" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+          <circle cx="7.5" cy="5.5" r="3" stroke="currentColor" stroke-width="1.5"/>
+        </svg>
+        <span>Users</span>
+      </a>
+      <a class="nav-item animate-nav-fade-in" routerLink="/admin/roles" routerLinkActive="active" (click)="closeSidebar()">
+        <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+          <path d="M9 17C13.4183 17 17 13.4183 17 9C17 4.58172 13.4183 1 9 1C4.58172 1 1 4.58172 1 9C1 13.4183 4.58172 17 9 17Z" stroke="currentColor" stroke-width="1.5"/>
+          <path d="M6 9L8 11L12 7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <span>Roles</span>
+      </a>
+      <a class="nav-item animate-nav-fade-in" routerLink="/admin/permissions" routerLinkActive="active" (click)="closeSidebar()">
+        <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+          <rect x="2" y="8" width="14" height="9" rx="1.5" stroke="currentColor" stroke-width="1.5"/>
+          <path d="M5 8V5C5 3.34315 6.34315 2 8 2C9.65685 2 11 3.34315 11 5V8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+        <span>Permissions</span>
+      </a>
+    </nav>
+
+    <div class="sidebar-footer">
+      <a class="nav-item animate-nav-fade-in" routerLink="/dashboard" (click)="closeSidebar()">
+        <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+          <path d="M13 3L5 9L13 15" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <span>Back to App</span>
+      </a>
+    </div>
+  </aside>
+
+  <!-- Main Content -->
+  <main class="main-content">
+    <div class="admin-page">
+      <!-- Top bar -->
+      <div class="admin-topbar">
+        <div class="topbar-title animate-fade-in-up">
+          <h1>Admin Dashboard</h1>
+          <p>Manage users, roles, and permissions</p>
+        </div>
+        <div class="topbar-actions animate-fade-in-up-100">
+          <button class="topbar-btn" aria-label="Notifications">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+              <path d="M10 2.5C7.5 2.5 6 5 6 7.5C6 10 5 11.5 5 11.5H15C15 11.5 14 10 14 7.5C14 5 12.5 2.5 10 2.5Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+              <path d="M8 14C8.5 15 9.5 15.5 10 15.5C10.5 15.5 11.5 15 12 14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- Quick Action Cards -->
+      <div class="dashboard-cards">
+        <a class="dash-card animate-fade-in-up" routerLink="/admin/users">
+          <div class="dash-card-icon users">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+              <path d="M17 21V19C17 16.7909 15.2091 15 13 15H5C2.79086 15 1 16.7909 1 19V21" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+              <circle cx="9" cy="7" r="4" stroke="currentColor" stroke-width="1.5"/>
+            </svg>
+          </div>
+          <div class="dash-card-body">
+            <h3>User Management</h3>
+            <p>Manage user accounts, roles, and permissions</p>
+          </div>
+          <div class="dash-card-link">
+            <span>View Users</span>
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+              <path d="M5 3L9 7L5 11" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+        </a>
+
+        <a class="dash-card animate-fade-in-up-60" routerLink="/admin/roles">
+          <div class="dash-card-icon roles">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+              <path d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z" stroke="currentColor" stroke-width="1.5"/>
+              <path d="M8 12L11 15L16 9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <div class="dash-card-body">
+            <h3>Role Management</h3>
+            <p>Create and manage user roles</p>
+          </div>
+          <div class="dash-card-link">
+            <span>View Roles</span>
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+              <path d="M5 3L9 7L5 11" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+        </a>
+
+        <a class="dash-card animate-fade-in-up-120" routerLink="/admin/permissions">
+          <div class="dash-card-icon permissions">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+              <rect x="3" y="11" width="18" height="11" rx="2" stroke="currentColor" stroke-width="1.5"/>
+              <path d="M7 11V7C7 3.69 9.69 1 13 1C16.31 1 19 3.69 19 7V11" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <div class="dash-card-body">
+            <h3>Permission Management</h3>
+            <p>Configure system permissions</p>
+          </div>
+          <div class="dash-card-link">
+            <span>View Permissions</span>
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+              <path d="M5 3L9 7L5 11" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+        </a>
+      </div>
+
+      <div class="route-container" [@routeAnimations]="prepareRoute(routerOutlet)" [@.disabled]="reducedMotion()">
+        <router-outlet #routerOutlet="outlet"></router-outlet>
+      </div>
+    </div>
+  </main>
+</div>

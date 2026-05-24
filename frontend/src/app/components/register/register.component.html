@@ -1,0 +1,134 @@
+<p-toast></p-toast>
+<div class="register-page">
+  <!-- Animated background shapes -->
+  <div class="bg-shapes">
+    <div class="shape shape-1"></div>
+    <div class="shape shape-2"></div>
+    <div class="shape shape-3"></div>
+    <div class="shape shape-4"></div>
+  </div>
+
+  <!-- Register card -->
+  <main class="register-card animate-fade-in-up-card">
+    <div class="card-header animate-fade-in-up-card-sooner">
+      <h1 class="card-headline">Create your account.</h1>
+      <p class="card-subtitle">Join our platform and get started.</p>
+    </div>
+
+    <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="register-form">
+      <div class="form-row animate-fade-in-up-50">          <div class="input-group animate-fade-in-up-50">
+          <label for="firstName">First name</label>
+          <div class="input-wrapper">
+            <svg class="input-icon" width="18" height="18" viewBox="0 0 18 18" fill="none">
+              <path d="M3 15C3 12.7909 5.23858 11 9 11C12.7614 11 15 12.7909 15 15" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/>
+              <circle cx="9" cy="6" r="3" stroke="currentColor" stroke-width="1.3"/>
+            </svg>
+            <input
+              pInputText
+              type="text"
+              id="firstName"
+              formControlName="firstName"
+              placeholder="First name"
+              class="register-input"
+            />
+          </div>
+        </div>
+
+        <div class="input-group animate-fade-in-up-100">
+          <label for="lastName">Last name</label>
+          <div class="input-wrapper">
+            <svg class="input-icon" width="18" height="18" viewBox="0 0 18 18" fill="none">
+              <path d="M3 15C3 12.7909 5.23858 11 9 11C12.7614 11 15 12.7909 15 15" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/>
+              <circle cx="9" cy="6" r="3" stroke="currentColor" stroke-width="1.3"/>
+            </svg>
+            <input
+              pInputText
+              type="text"
+              id="lastName"
+              formControlName="lastName"
+              placeholder="Last name"
+              class="register-input"
+            />
+          </div>
+        </div>
+      </div>
+
+      <div class="input-group animate-fade-in-up-50">
+        <label for="email">Email address</label>
+        <div class="input-wrapper">
+          <svg class="input-icon" width="18" height="18" viewBox="0 0 18 18" fill="none">
+            <path d="M3 4.5H15C15.4125 4.5 15.75 4.8375 15.75 5.25V12.75C15.75 13.1625 15.4125 13.5 15 13.5H3C2.5875 13.5 2.25 13.1625 2.25 12.75V5.25C2.25 4.8375 2.5875 4.5 3 4.5Z" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M15.75 5.25L9 10.125L2.25 5.25" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <input
+            pInputText
+            type="email"
+            id="email"
+            formControlName="email"
+            placeholder="you@example.com"
+            class="register-input"
+          />
+        </div>
+      </div>
+
+      <div class="input-group animate-fade-in-up-100">
+        <label for="password">Password</label>
+        <div class="input-wrapper">
+          <svg class="input-icon" width="18" height="18" viewBox="0 0 18 18" fill="none">
+            <rect x="3" y="8" width="12" height="8" rx="1.5" stroke="currentColor" stroke-width="1.3"/>
+            <path d="M6 8V5C6 3.34315 7.34315 2 9 2C10.6569 2 12 3.34315 12 5V8" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/>
+            <circle cx="9" cy="11.5" r="1" fill="currentColor"/>
+          </svg>
+          <p-password
+            formControlName="password"
+            placeholder="Create a password"
+            [feedback]="false"
+            inputId="password"
+            styleClass="register-password"
+          ></p-password>
+        </div>
+      </div>
+
+      <div class="input-group animate-fade-in-up-150">
+        <label for="confirmPassword">Confirm password</label>
+        <div class="input-wrapper">
+          <svg class="input-icon" width="18" height="18" viewBox="0 0 18 18" fill="none">
+            <rect x="3" y="8" width="12" height="8" rx="1.5" stroke="currentColor" stroke-width="1.3"/>
+            <path d="M6 8V5C6 3.34315 7.34315 2 9 2C10.6569 2 12 3.34315 12 5V8" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/>
+            <circle cx="9" cy="11.5" r="1" fill="currentColor"/>
+          </svg>
+          <p-password
+            formControlName="confirmPassword"
+            placeholder="Confirm your password"
+            [feedback]="false"
+            inputId="confirmPassword"
+            styleClass="register-password"
+          ></p-password>
+        </div>
+      </div>
+
+      <button
+        type="submit"
+        [disabled]="isLoading"
+        class="btn-signin animate-fade-in-up-250"
+      >
+        @if (!isLoading) {
+          <span>Create Account</span>
+        }
+        @if (isLoading) {
+          <span class="loading-text">
+            <svg class="spinner-apple" width="18" height="18" viewBox="0 0 18 18" fill="none">
+              <circle cx="9" cy="9" r="7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="34" stroke-dashoffset="10"/>
+            </svg>
+            Creating Account…
+          </span>
+        }
+      </button>
+    </form>
+
+    <div class="card-footer animate-fade-in-up-300">
+      <span class="footer-text">Already have an account?</span>
+      <a routerLink="/" class="link link-strong">Sign In</a>
+    </div>
+  </main>
+</div>

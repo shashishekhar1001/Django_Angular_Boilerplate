@@ -1,0 +1,98 @@
+/* ═══════════════════════════════════════
+   Shared Animation Keyframes
+   ═══════════════════════════════════════
+   Imported globally via angular.json.
+   Avoid duplicating these across components.
+   ═══════════════════════════════════════ */
+
+/* ─── Fade In Up (8px) ───
+   Subtle lift for inner card elements, form rows, stat tiles, table rows. */
+@keyframes fade-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ─── Fade In Up (24px + scale) ───
+   Card-level entrance with a slight scale-up for a gentle zoom effect. */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(24px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* ─── Nav Fade In ───
+   Sidebar nav item entrance from the left. */
+@keyframes nav-fade-in {
+  from {
+    opacity: 0;
+    transform: translateX(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* ─── Border Glow (Indigo) ───
+   Focus ring animation for auth form inputs (login, register, forgot-password). */
+@keyframes border-glow-indigo {
+  0%, 100% {
+    box-shadow: 0 0 0 3px rgba(129, 140, 248, 0.15) !important;
+  }
+  50% {
+    box-shadow: 0 0 0 5px rgba(129, 140, 248, 0.08), 0 0 12px rgba(129, 140, 248, 0.08) !important;
+  }
+}
+
+/* ─── Border Glow (Blue) ───
+   Focus ring animation for admin table search inputs (user, role, permission lists). */
+@keyframes border-glow-blue {
+  0%, 100% {
+    box-shadow: 0 0 0 3px rgba(0, 102, 204, 0.12) !important;
+  }
+  50% {
+    box-shadow: 0 0 0 5px rgba(0, 102, 204, 0.06), 0 0 12px rgba(0, 102, 204, 0.06) !important;
+  }
+}
+
+/* ═══════════════════════════════════════
+   Utility Classes — Add to element classList to animate
+   ═══════════════════════════════════════ */
+
+/* ─── fade-in-up (0.4s, 8px lift) ─── */
+.animate-fade-in-up       { animation: fade-in-up 0.4s ease both; }
+.animate-fade-in-up-fast  { animation: fade-in-up 0.35s ease both; }
+
+/* Delayed cascade (standard) */
+.animate-fade-in-up-50   { animation: fade-in-up 0.4s ease both 50ms; }
+.animate-fade-in-up-100  { animation: fade-in-up 0.4s ease both 100ms; }
+.animate-fade-in-up-120  { animation: fade-in-up 0.4s ease both 120ms; }
+.animate-fade-in-up-150  { animation: fade-in-up 0.4s ease both 150ms; }
+.animate-fade-in-up-200  { animation: fade-in-up 0.4s ease both 200ms; }
+.animate-fade-in-up-240  { animation: fade-in-up 0.4s ease both 240ms; }
+.animate-fade-in-up-250  { animation: fade-in-up 0.4s ease both 250ms; }
+.animate-fade-in-up-300  { animation: fade-in-up 0.4s ease both 300ms; }
+
+/* Delayed cascade (stagger — stat tiles, dash cards) */
+.animate-fade-in-up-40   { animation: fade-in-up 0.4s ease both 40ms; }
+.animate-fade-in-up-60   { animation: fade-in-up 0.4s ease both 60ms; }
+.animate-fade-in-up-80   { animation: fade-in-up 0.4s ease both 80ms; }
+.animate-fade-in-up-160  { animation: fade-in-up 0.4s ease both 160ms; }
+
+/* ─── fadeInUp (card-scale entrance, 24px + scale) ─── */
+.animate-fade-in-up-card        { animation: fadeInUp 0.6s ease-out; }
+.animate-fade-in-up-card-sooner { animation: fadeInUp 0.5s ease both; }
+
+/* ─── nav-fade-in (sidebar items) ─── */
+.animate-nav-fade-in            { animation: nav-fade-in 0.35s ease both; }

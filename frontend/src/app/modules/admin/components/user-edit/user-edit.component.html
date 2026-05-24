@@ -1,0 +1,170 @@
+<p-toast 
+  [showTransformOptions]="'translateY(-100%)'" 
+  [showTransitionOptions]="'300ms ease-out'"
+  [hideTransformOptions]="'translateY(-10px)'"
+  [hideTransitionOptions]="'200ms ease-in'"></p-toast>
+<div class="user-edit-page">
+  <!-- Header -->
+  <div class="page-header animate-fade-in-up-fast">
+    <div class="header-left">
+      <button class="back-btn" (click)="goBack()" aria-label="Back">
+        <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+          <path d="M11 4L6 9L11 14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </button>
+      <div>
+        <h1 class="page-title">{{ isNewUser() ? 'Add User' : 'Edit User' }}</h1>
+        <p class="page-subtitle">{{ isNewUser() ? 'Create a new user account' : 'Update user details and permissions' }}</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Form Card -->
+  <div class="form-card animate-fade-in-up-fast">
+    <form (ngSubmit)="saveUser()">
+      <div class="form-section">
+        <h2 class="form-section-title">Personal Information</h2>
+        <div class="form-grid">
+          <div class="form-field">
+            <label for="firstName">First name</label>
+            <input
+              pInputText
+              id="firstName"
+              [ngModel]="user().first_name"
+              (ngModelChange)="updateFirstName($event)"
+              name="firstName"
+              required
+              placeholder="First name"
+              class="apple-input"
+              />
+          </div>
+
+          <div class="form-field">
+            <label for="lastName">Last name</label>
+            <input
+              pInputText
+              id="lastName"
+              [ngModel]="user().last_name"
+              (ngModelChange)="updateLastName($event)"
+              name="lastName"
+              required
+              placeholder="Last name"
+              class="apple-input"
+              />
+          </div>
+
+          <div class="form-field">
+            <label for="email">Email address</label>
+            <input
+              pInputText
+              id="email"
+              type="email"
+              [ngModel]="user().email"
+              (ngModelChange)="updateEmail($event)"
+              name="email"
+              required
+              placeholder="user@example.com"
+              class="apple-input"
+              />
+          </div>
+
+          @if (isNewUser()) {
+            <div class="form-field">
+              <label for="password">Password</label>
+              <p-password
+                [(ngModel)]="password"
+                name="password"
+                placeholder="Enter password"
+                [toggleMask]="true"
+                [feedback]="true"
+                styleClass="apple-password"
+              ></p-password>
+            </div>
+          }
+        </div>
+      </div>
+
+      <div class="form-divider"></div>
+
+      <div class="form-section">
+        <h2 class="form-section-title">Account Status</h2>
+        <div class="status-toggles">
+          <label class="toggle-row">
+            <input type="checkbox" [ngModel]="isActiveValue" (ngModelChange)="isActiveValue = $event" name="isActive" />
+            <span class="toggle-track">
+              <span class="toggle-thumb"></span>
+            </span>
+            <span class="toggle-label">Active</span>
+          </label>
+
+          <label class="toggle-row">
+            <input type="checkbox" [ngModel]="isStaffValue" (ngModelChange)="isStaffValue = $event" name="isStaff" />
+            <span class="toggle-track">
+              <span class="toggle-thumb"></span>
+            </span>
+            <span class="toggle-label">Staff status</span>
+          </label>
+        </div>
+      </div>
+
+      <div class="form-divider"></div>
+
+      <div class="form-section">
+        <h2 class="form-section-title">Roles & Permissions</h2>
+        <div class="form-grid">
+          <div class="form-field full-width">
+            <label for="roles">Roles</label>
+            <p-multiSelect
+              [(ngModel)]="selectedRoles"
+              name="roles"
+              [options]="availableRoles()"
+              optionLabel="name"
+              optionValue="id"
+              placeholder="Select roles"
+              display="chip"
+              styleClass="apple-multiselect"
+            ></p-multiSelect>
+          </div>
+
+          <div class="form-field full-width">
+            <label for="permissionGroups">Permission groups</label>
+            <p-multiSelect
+              [(ngModel)]="selectedPermissionGroups"
+              name="permissionGroups"
+              [options]="availablePermissionGroups()"
+              optionLabel="name"
+              optionValue="id"
+              placeholder="Select permission groups"
+              display="chip"
+              styleClass="apple-multiselect"
+            ></p-multiSelect>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-divider"></div>
+
+      <div class="form-actions">
+        <button type="button" class="btn-ghost" (click)="goBack()">Cancel</button>
+        @if (!isNewUser()) {
+          <button type="button" class="btn-danger" (click)="deleteUser()">Delete</button>
+        }
+        <button type="submit" class="btn-primary" [disabled]="saving()">
+          @if (!saving()) {
+            <span>{{ isNewUser() ? 'Create User' : 'Save Changes' }}</span>
+          }
+          @if (saving()) {
+            <span class="loading-text">
+              <svg class="spinner-apple" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                <circle cx="8" cy="8" r="6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="29" stroke-dashoffset="8"/>
+              </svg>
+              Saving…
+            </span>
+          }
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<p-confirmDialog></p-confirmDialog>

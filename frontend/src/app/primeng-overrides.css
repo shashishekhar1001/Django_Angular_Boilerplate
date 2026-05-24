@@ -1,0 +1,79 @@
+/* ═══════════════════════════════════════
+   Shared PrimeNG Overrides
+   ═══════════════════════════════════════
+   Imported globally via angular.json.
+   Avoid duplicating ::ng-deep overrides across components.
+   ═══════════════════════════════════════ */
+
+/* ─── Apple Table (p-datatable) ───
+   Used by: user-list, role-list, permission-list */
+
+.apple-table .p-datatable-wrapper {
+  border: none;
+}
+
+.apple-table .p-datatable-thead > tr > th {
+  background: var(--color-canvas-parchment);
+  color: var(--color-ink-muted-48);
+  font-weight: 600;
+  font-size: var(--text-caption-size);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  padding: var(--spacing-sm) var(--spacing-lg);
+  border: none;
+  border-bottom: 1px solid var(--color-divider-soft);
+}
+
+.apple-table .p-datatable-tbody > tr > td {
+  padding: var(--spacing-sm) var(--spacing-lg);
+  border: none;
+  border-bottom: 1px solid var(--color-divider-soft);
+  font-size: var(--text-body-size);
+  color: var(--color-ink);
+  vertical-align: middle;
+}
+
+.apple-table .p-datatable-tbody > tr:last-child > td {
+  border-bottom: none;
+}
+
+.apple-table .p-datatable-tbody > tr:hover {
+  background: rgba(0, 0, 0, 0.02);
+}
+
+/* Extra left padding for first column */
+.apple-table .p-datatable-tbody > tr > td:first-child {
+  padding-left: var(--spacing-lg);
+}
+
+
+/* ─── Apple MultiSelect ───
+   Used by: user-edit, role-edit */
+
+.apple-multiselect {
+  width: 100% !important;
+}
+
+.apple-multiselect .p-multiselect-label {
+  padding: var(--spacing-sm) var(--spacing-md) !important;
+  font-family: var(--font-body) !important;
+  font-size: var(--text-body-size) !important;
+}
+
+.apple-multiselect .p-multiselect-trigger {
+  width: 40px !important;
+}
+
+.apple-multiselect .p-multiselect-chip {
+  border-radius: var(--rounded-pill) !important;
+  font-size: var(--text-caption-size) !important;
+}
+
+
+/* ─── PrimeNG Password Panel ───
+   Hide the password strength overlay panel.
+   Used by: login, register */
+
+.p-password-panel {
+  display: none !important;
+}

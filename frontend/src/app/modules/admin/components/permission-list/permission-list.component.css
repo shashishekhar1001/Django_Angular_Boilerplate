@@ -1,0 +1,45 @@
+/* ═══════════════════════════════════════
+   Permission List — Apple Design Language
+   ═══════════════════════════════════════
+   Shared list styles (page-header, toolbar,
+   search, icon-btn, loading overlay, etc.)
+   are in src/app/admin-list-styles.css.
+   ═══════════════════════════════════════ */
+
+.list-page {
+  padding: 0;
+}
+
+/* ─── Name Cell ─── */
+.name-cell {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+}
+
+.perm-icon {
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--rounded-sm);
+  background: rgba(249, 171, 0, 0.08);
+  color: #f9ab00;
+}
+
+.perm-name {
+  font-weight: 500;
+  color: var(--color-ink);
+}
+
+/* ─── Codename Tag ─── */
+.codename-tag {
+  font-family: 'SF Mono', 'SFMono-Regular', 'ui-monospace', 'Menlo', 'Monaco', 'Cascadia Code', monospace;
+  font-size: var(--text-caption-size);
+  background: var(--color-surface-pearl);
+  color: var(--color-ink-muted-48);
+  padding: 3px var(--spacing-xs);
+  border-radius: var(--rounded-xs);
+  border: 1px solid var(--color-divider-soft);
+}

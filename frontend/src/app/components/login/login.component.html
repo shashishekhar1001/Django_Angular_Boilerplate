@@ -1,0 +1,91 @@
+<p-toast></p-toast>
+<div class="login-page">
+  <!-- Animated background shapes -->
+  <div class="bg-shapes">
+    <div class="shape shape-1"></div>
+    <div class="shape shape-2"></div>
+    <div class="shape shape-3"></div>
+    <div class="shape shape-4"></div>
+  </div>
+
+  <!-- Login card -->
+  <main class="login-card animate-fade-in-up-card">
+    <div class="card-header animate-fade-in-up">
+      <h1 class="card-headline">Welcome back</h1>
+      <p class="card-subtitle">Sign in to continue to your account</p>
+    </div>
+
+    <form [formGroup]="loginForm()" (ngSubmit)="onSubmit()" class="login-form">
+      <div class="input-group animate-fade-in-up-50">
+        <label for="email">Email address</label>
+        <div class="input-wrapper">
+          <svg class="input-icon" width="18" height="18" viewBox="0 0 18 18" fill="none">
+            <path d="M3 4.5H15C15.4125 4.5 15.75 4.8375 15.75 5.25V12.75C15.75 13.1625 15.4125 13.5 15 13.5H3C2.5875 13.5 2.25 13.1625 2.25 12.75V5.25C2.25 4.8375 2.5875 4.5 3 4.5Z" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M15.75 5.25L9 10.125L2.25 5.25" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <input
+            pInputText
+            type="email"
+            id="email"
+            formControlName="email"
+            placeholder="you@example.com"
+            class="login-input"
+            />
+        </div>
+      </div>
+
+      <div class="input-group animate-fade-in-up-100">
+        <label for="password">Password</label>
+        <div class="input-wrapper">
+          <svg class="input-icon" width="18" height="18" viewBox="0 0 18 18" fill="none">
+            <rect x="3" y="8" width="12" height="8" rx="1.5" stroke="currentColor" stroke-width="1.3"/>
+            <path d="M6 8V5C6 3.34315 7.34315 2 9 2C10.6569 2 12 3.34315 12 5V8" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/>
+            <circle cx="9" cy="11.5" r="1" fill="currentColor"/>
+          </svg>
+          <p-password
+            formControlName="password"
+            placeholder="Enter your password"
+            [feedback]="false"
+            inputId="password"
+            styleClass="login-password"
+          ></p-password>
+        </div>
+      </div>
+
+      <div class="forgot-row animate-fade-in-up-120">
+        <a routerLink="/forgot-password" class="link">Forgot password?</a>
+      </div>
+
+      <button
+        type="submit"
+        [disabled]="!loginForm().valid || isLoading()"
+        class="btn-signin animate-fade-in-up-150"
+        >
+        @if (!isLoading()) {
+          <span>Sign In</span>
+        }
+        @if (isLoading()) {
+          <span class="loading-text">
+            <svg class="spinner-apple" width="18" height="18" viewBox="0 0 18 18" fill="none">
+              <circle cx="9" cy="9" r="7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="34" stroke-dashoffset="10"/>
+            </svg>
+            Signing In…
+          </span>
+        }
+      </button>
+
+      @if (errorMessage()) {
+        <p-message
+          severity="error"
+          [text]="errorMessage()"
+          styleClass="error-msg"
+        ></p-message>
+      }
+    </form>
+
+    <div class="card-footer animate-fade-in-up-200">
+      <span class="footer-text">Don't have an account?</span>
+      <a routerLink="/register" class="link link-strong">Create one</a>
+    </div>
+  </main>
+</div>

@@ -1,0 +1,502 @@
+/* You can add global styles to this file, and also import other style files */
+
+/* Import Inter from Google Fonts - closest open-source equivalent to SF Pro */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
+
+/* PrimeNG styles loaded via CDN in index.html */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+body {
+  margin: 0;
+  font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+  font-size: var(--text-body-size);
+  font-weight: var(--text-body-weight);
+  line-height: var(--text-body-line);
+  letter-spacing: var(--text-body-tracking);
+  color: var(--color-body);
+  background-color: var(--color-canvas);
+}
+
+/* Apple-style typography reset */
+h1, h2, h3, h4, h5, h6 {
+  margin: 0;
+  font-weight: 600;
+  color: var(--color-ink);
+}
+
+p {
+  margin: 0;
+  color: var(--color-body);
+}
+
+a {
+  color: var(--color-primary);
+  text-decoration: none;
+  transition: opacity 0.2s ease;
+}
+
+a:hover {
+  opacity: 0.85;
+}
+
+/* Apple-style focus ring */
+*:focus-visible {
+  outline: 2px solid var(--color-primary-focus);
+  outline-offset: 2px;
+}
+
+/* Utility: visually hide but keep accessible */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Reset PrimeNG button overrides for Apple styling */
+.p-button {
+  font-family: inherit !important;
+}
+
+/* ═══════════════════════════════════════
+   Apple-Style Spinner — Thin & Smooth
+   ═══════════════════════════════════════ */
+
+/* Unified spinner used by login, register, forgot-password, user-edit, dashboard */
+.spinner-apple {
+  animation: apple-spin 1s cubic-bezier(0.4, 0.0, 0.2, 1) infinite;
+  will-change: transform;
+}
+
+@keyframes apple-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* Legacy alias so old .spinner references still work */
+.spinner {
+  animation: apple-spin 1s cubic-bezier(0.4, 0.0, 0.2, 1) infinite;
+  will-change: transform;
+}
+
+/* ─── PrimeNG loading overlay fallback ─── */
+.p-datatable-loading-overlay {
+  background: rgba(255, 255, 255, 0.5) !important;
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
+}
+
+.p-datatable-loading-overlay .p-datatable-loading-icon {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  font-size: 0;
+}
+
+.p-datatable-loading-overlay .p-datatable-loading-icon > * {
+  display: none;
+}
+
+.p-datatable-loading-overlay .p-datatable-loading-icon::after {
+  content: '';
+  display: block;
+  width: 28px;
+  height: 28px;
+  border: 2.5px solid var(--color-divider-soft);
+  border-top-color: var(--color-primary);
+  border-radius: 50%;
+  animation: apple-spin 1s cubic-bezier(0.4, 0.0, 0.2, 1) infinite;
+}
+
+.dark .p-datatable-loading-overlay {
+  background: rgba(0, 0, 0, 0.5) !important;
+}
+
+.dark .p-datatable-loading-overlay .p-datatable-loading-icon::after {
+  border-color: rgba(255, 255, 255, 0.12);
+  border-top-color: var(--color-primary);
+}
+
+/* ═══════════════════════════════════════
+   Skeleton Loading Shimmer — Apple Style
+   ═══════════════════════════════════════ */
+
+@keyframes skeleton-shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+.skeleton {
+  background: linear-gradient(
+    90deg,
+    var(--color-hairline) 25%,
+    color-mix(in srgb, var(--color-hairline) 40%, var(--color-canvas-parchment) 60%) 50%,
+    var(--color-hairline) 75%
+  );
+  background-size: 200% 100%;
+  animation: skeleton-shimmer 1.8s ease-in-out infinite;
+  border-radius: var(--rounded-xs);
+  height: 14px;
+  width: 100%;
+}
+
+.skeleton.skeleton-avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: var(--rounded-full);
+  flex-shrink: 0;
+}
+
+.skeleton.skeleton-icon-sq {
+  width: 32px;
+  height: 32px;
+  border-radius: var(--rounded-sm);
+  flex-shrink: 0;
+}
+
+.skeleton.skeleton-pill {
+  height: 26px;
+  border-radius: var(--rounded-pill);
+  width: 80px;
+}
+
+.skeleton.skeleton-tag {
+  height: 24px;
+  border-radius: var(--rounded-xs);
+  width: 100px;
+}
+
+.skeleton.skeleton-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: var(--rounded-full);
+  display: inline-block;
+}
+
+.skeleton.skeleton-icon-btn {
+  width: 32px;
+  height: 32px;
+  border-radius: var(--rounded-sm);
+}
+
+/* Width helpers for skeleton lines */
+.skeleton-w-50 { width: 50px; }
+.skeleton-w-60 { width: 60px; }
+.skeleton-w-70 { width: 70px; }
+.skeleton-w-80 { width: 80px; }
+.skeleton-w-100 { width: 100px; }
+.skeleton-w-120 { width: 120px; }
+.skeleton-w-140 { width: 140px; }
+.skeleton-w-160 { width: 160px; }
+.skeleton-w-180 { width: 180px; }
+.skeleton-w-200 { width: 200px; }
+
+/* Skeleton cells inside table */
+.skeleton-cell {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  padding: 4px 0;
+}
+
+.skeleton-cell .skeleton-lines {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  flex: 1;
+}
+
+.skeleton-row {
+  opacity: 0.7;
+}
+
+.skeleton-row td {
+  padding: var(--spacing-sm) var(--spacing-lg) !important;
+  border: none !important;
+  border-bottom: 1px solid var(--color-divider-soft) !important;
+  vertical-align: middle !important;
+}
+
+/* Prevent layout shift when paginator appears/disappears */
+.apple-table {
+  min-height: 460px;
+}
+
+.p-datatable-wrapper {
+  min-height: 400px;
+}
+
+.p-datatable-tbody > tr.skeleton-row:last-child > td {
+  border-bottom: 1px solid var(--color-divider-soft) !important;
+}
+
+.p-datatable-tbody > tr.skeleton-row:hover {
+  background: transparent !important;
+}
+
+/* ─── Dark mode skeleton ─── */
+.dark .skeleton {
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0.06) 25%,
+    rgba(255, 255, 255, 0.12) 50%,
+    rgba(255, 255, 255, 0.06) 75%
+  );
+  background-size: 200% 100%;
+}
+
+/* ═══════════════════════════════════════
+   Modern Paginator — Clean & Minimal
+   ═══════════════════════════════════════ */
+
+/* ─── Paginator Container ─── */
+.p-paginator {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 2px;
+  padding: var(--spacing-lg) var(--spacing-lg);
+  background: var(--color-canvas);
+  border-radius: 0 0 var(--rounded-lg) var(--rounded-lg);
+  font-family: var(--font-body);
+}
+
+/* ─── Current Page Report ─── */
+.p-paginator-current {
+  font-size: var(--text-fine-print-size);
+  font-weight: 500;
+  color: var(--color-ink-muted-48);
+  margin-right: auto;
+  order: -1;
+  padding: 0;
+}
+
+/* ─── Page Buttons ─── */
+.p-paginator .p-paginator-first,
+.p-paginator .p-paginator-prev,
+.p-paginator .p-paginator-next,
+.p-paginator .p-paginator-last,
+.p-paginator .p-paginator-page {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 36px;
+  height: 36px;
+  border-radius: var(--rounded-full);
+  border: none;
+  background: transparent;
+  color: var(--color-ink-muted-48);
+  font-size: var(--text-caption-size);
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  font-family: inherit;
+  line-height: 1;
+  padding: 0 4px;
+  margin: 0 1px;
+  text-decoration: none;
+  user-select: none;
+  position: relative;
+}
+
+.p-paginator .p-paginator-page:hover:not(.p-paginator-page-selected) {
+  background: var(--color-canvas-parchment);
+  color: var(--color-ink);
+  transform: scale(1.05);
+}
+
+.p-paginator .p-paginator-first:active,
+.p-paginator .p-paginator-prev:active,
+.p-paginator .p-paginator-next:active,
+.p-paginator .p-paginator-last:active,
+.p-paginator .p-paginator-page:active {
+  transform: scale(0.92);
+}
+
+/* ─── Active Page — filled pill ─── */
+.p-paginator .p-paginator-page.p-paginator-page-selected {
+  background: var(--color-primary);
+  color: #ffffff;
+  font-weight: 600;
+  box-shadow: 0 2px 8px rgba(0, 102, 204, 0.3);
+  transform: scale(1);
+}
+
+.p-paginator .p-paginator-page.p-paginator-page-selected:hover {
+  background: var(--color-primary-focus);
+  color: #ffffff;
+  box-shadow: 0 4px 14px rgba(0, 102, 204, 0.35);
+  transform: scale(1.05);
+}
+
+/* ─── Disabled Buttons ─── */
+.p-paginator .p-disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+/* ─── Rows Per Page Select ─── */
+.p-paginator .p-paginator-rpp-options {
+  margin-left: auto;
+  order: 99;
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+  font-size: var(--text-fine-print-size);
+  font-weight: 500;
+  color: var(--color-ink-muted-48);
+}
+
+.p-paginator .p-select {
+  border: none;
+  border-radius: var(--rounded-full);
+  background: var(--color-canvas-parchment);
+  transition: all 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  min-width: 68px;
+  height: 32px;
+  font-family: inherit;
+  cursor: pointer;
+}
+
+.p-paginator .p-select:hover {
+  background: var(--color-hairline);
+}
+
+.p-paginator .p-select.p-focus {
+  box-shadow: 0 0 0 3px rgba(0, 102, 204, 0.15);
+  background: var(--color-surface-pearl);
+}
+
+.p-paginator .p-select .p-select-label {
+  font-size: var(--text-caption-size);
+  font-weight: 500;
+  color: var(--color-ink);
+  padding: 4px var(--spacing-sm);
+  font-family: inherit;
+  text-transform: none;
+  letter-spacing: normal;
+}
+
+.p-paginator .p-select .p-select-dropdown {
+  width: 28px;
+  color: var(--color-ink-muted-48);
+}
+
+/* ─── Select Overlay ─── */
+.p-select-overlay {
+  border: none;
+  border-radius: var(--rounded-sm);
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.1), 0 1px 4px rgba(0, 0, 0, 0.06);
+  background: var(--color-canvas);
+  font-family: var(--font-body);
+  overflow: hidden;
+  padding: var(--spacing-xxs);
+}
+
+.p-select-overlay .p-select-list-container {
+  padding: 0;
+}
+
+.p-select-overlay .p-select-option {
+  padding: var(--spacing-xs) var(--spacing-sm);
+  border-radius: var(--rounded-xs);
+  font-size: var(--text-caption-size);
+  font-weight: 500;
+  color: var(--color-ink);
+  transition: all 0.12s ease;
+  cursor: pointer;
+}
+
+.p-select-overlay .p-select-option:hover {
+  background: var(--color-canvas-parchment);
+}
+
+.p-select-overlay .p-select-option.p-select-option-selected {
+  background: rgba(0, 102, 204, 0.08);
+  color: var(--color-primary);
+  font-weight: 600;
+}
+
+/* ─── Paginator Icons ─── */
+.p-paginator .p-paginator-icon {
+  font-size: 15px;
+  line-height: 1;
+}
+
+/* ─── Navigation chevron buttons — circular hover ─── */
+.p-paginator .p-paginator-first:not(.p-disabled):hover,
+.p-paginator .p-paginator-prev:not(.p-disabled):hover,
+.p-paginator .p-paginator-next:not(.p-disabled):hover,
+.p-paginator .p-paginator-last:not(.p-disabled):hover {
+  background: var(--color-canvas-parchment);
+  color: var(--color-ink);
+  transform: scale(1.05);
+}
+
+.p-paginator .p-paginator-first:not(.p-disabled):active,
+.p-paginator .p-paginator-prev:not(.p-disabled):active,
+.p-paginator .p-paginator-next:not(.p-disabled):active,
+.p-paginator .p-paginator-last:not(.p-disabled):active {
+  transform: scale(0.92);
+}
+
+/* ─── Responsive Paginator ─── */
+@media (max-width: 768px) {
+  .p-paginator {
+    gap: 2px;
+    padding: var(--spacing-md) var(--spacing-md);
+  }
+
+  .p-paginator .p-paginator-first,
+  .p-paginator .p-paginator-prev,
+  .p-paginator .p-paginator-next,
+  .p-paginator .p-paginator-last {
+    min-width: 32px;
+    height: 32px;
+  }
+
+  .p-paginator .p-paginator-page {
+    min-width: 32px;
+    height: 32px;
+    font-size: var(--text-fine-print-size);
+  }
+
+  .p-paginator-current {
+    width: 100%;
+    margin: 0 0 var(--spacing-xs) 0;
+    text-align: center;
+    order: -1;
+  }
+
+  .p-paginator .p-paginator-rpp-options {
+    width: 100%;
+    justify-content: center;
+    margin: var(--spacing-xs) 0 0 0;
+    order: 99;
+  }
+}

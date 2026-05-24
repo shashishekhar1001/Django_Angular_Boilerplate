@@ -1,0 +1,84 @@
+<p-toast 
+  [showTransformOptions]="'translateY(-100%)'" 
+  [showTransitionOptions]="'300ms ease-out'"
+  [hideTransformOptions]="'translateY(-10px)'"
+  [hideTransitionOptions]="'200ms ease-in'"></p-toast>
+<div class="permission-edit-page">
+  <!-- Header -->
+  <div class="page-header animate-fade-in-up-fast">
+    <div class="header-left">
+      <button class="back-btn" (click)="goBack()" aria-label="Back">
+        <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+          <path d="M11 4L6 9L11 14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </button>
+      <div>
+        <h1 class="page-title">{{ isNewPermission() ? 'Add Permission' : 'Edit Permission' }}</h1>
+        <p class="page-subtitle">{{ isNewPermission() ? 'Create a new permission' : 'Update permission name and codename' }}</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Form Card -->
+  <div class="form-card animate-fade-in-up-fast">
+    <form (ngSubmit)="savePermission()">
+      <div class="form-section">
+        <h2 class="form-section-title">Permission Details</h2>
+        <div class="form-grid">
+          <div class="form-field full-width">
+            <label for="permName">Permission name</label>
+            <input
+              pInputText
+              id="permName"
+              [ngModel]="name()"
+              (ngModelChange)="name.set($event)"
+              name="permName"
+              required
+              placeholder="e.g. Can edit articles"
+              class="apple-input"
+              />
+          </div>
+
+          <div class="form-field full-width">
+            <label for="codename">Codename</label>
+            <input
+              pInputText
+              id="codename"
+              [ngModel]="codename()"
+              (ngModelChange)="codename.set($event)"
+              name="codename"
+              required
+              placeholder="e.g. can_edit_articles"
+              class="apple-input"
+              />
+            <span class="field-hint">Unique identifier used in code (lowercase, underscores)</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-divider"></div>
+
+      <div class="form-actions">
+        <button type="button" class="btn-ghost" (click)="goBack()">Cancel</button>
+        @if (!isNewPermission()) {
+          <button type="button" class="btn-danger" (click)="deletePermission()">Delete</button>
+        }
+        <button type="submit" class="btn-primary" [disabled]="saving()">
+          @if (!saving()) {
+            <span>{{ isNewPermission() ? 'Create Permission' : 'Save Changes' }}</span>
+          }
+          @if (saving()) {
+            <span class="loading-text">
+              <svg class="spinner-apple" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                <circle cx="8" cy="8" r="6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="29" stroke-dashoffset="8"/>
+              </svg>
+              Saving…
+            </span>
+          }
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<p-confirmDialog></p-confirmDialog>
