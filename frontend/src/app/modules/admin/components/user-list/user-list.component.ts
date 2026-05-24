@@ -1,8 +1,8 @@
-import { Component, inject, signal, OnInit, effect, DestroyRef } from '@angular/core';
+import { Component, inject, signal, OnInit, effect, DestroyRef, ViewChild } from '@angular/core';
 
 import { Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
-import { TableModule } from 'primeng/table';
+import { Table, TableModule } from 'primeng/table';
 import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
@@ -38,6 +38,8 @@ export class UserListComponent implements OnInit {
   private _exitTimer: ReturnType<typeof setTimeout> | null = null;
   private _overlayTimer: ReturnType<typeof setTimeout> | null = null;
   readonly skeletonItems = Array.from({length: 10});
+
+  @ViewChild(Table) private table!: Table;
 
   ngOnInit(): void {
     this.loadUsers();
@@ -115,6 +117,9 @@ export class UserListComponent implements OnInit {
         user.last_name.toLowerCase().includes(term),
     );
     this.filteredUsers.set(filtered);
+    if (this.table) {
+      this.table.first = 0;
+    }
   }
 
   hasRole(user: User, roleName: string): boolean {

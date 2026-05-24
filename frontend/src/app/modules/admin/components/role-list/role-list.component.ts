@@ -1,8 +1,8 @@
-import { Component, inject, signal, OnInit, effect, DestroyRef } from '@angular/core';
+import { Component, inject, signal, OnInit, effect, DestroyRef, ViewChild } from '@angular/core';
 
 import { Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
-import { TableModule } from 'primeng/table';
+import { Table, TableModule } from 'primeng/table';
 import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
@@ -31,6 +31,8 @@ export class RoleListComponent implements OnInit {
   private _exitTimer: ReturnType<typeof setTimeout> | null = null;
   private _overlayTimer: ReturnType<typeof setTimeout> | null = null;
   readonly skeletonItems = Array.from({length: 10});
+
+  @ViewChild(Table) private table!: Table;
 
   ngOnInit(): void {
     this.loadRoles();
@@ -103,6 +105,9 @@ export class RoleListComponent implements OnInit {
     const term = this.searchTerm().toLowerCase();
     const filtered = this.roles().filter((role) => role.name.toLowerCase().includes(term));
     this.filteredRoles.set(filtered);
+    if (this.table) {
+      this.table.first = 0;
+    }
   }
 
   addRole(): void {

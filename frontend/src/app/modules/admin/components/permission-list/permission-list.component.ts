@@ -1,8 +1,8 @@
-import { Component, inject, signal, OnInit, effect, DestroyRef } from '@angular/core';
+import { Component, inject, signal, OnInit, effect, DestroyRef, ViewChild } from '@angular/core';
 
 import { Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
-import { TableModule } from 'primeng/table';
+import { Table, TableModule } from 'primeng/table';
 import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
@@ -31,6 +31,8 @@ export class PermissionListComponent implements OnInit {
   private _exitTimer: ReturnType<typeof setTimeout> | null = null;
   private _overlayTimer: ReturnType<typeof setTimeout> | null = null;
   readonly skeletonItems = Array.from({length: 10});
+
+  @ViewChild(Table) private table!: Table;
 
   ngOnInit(): void {
     this.loadPermissions();
@@ -107,6 +109,9 @@ export class PermissionListComponent implements OnInit {
         permission.codename.toLowerCase().includes(term),
     );
     this.filteredPermissions.set(filtered);
+    if (this.table) {
+      this.table.first = 0;
+    }
   }
 
   addPermission(): void {
