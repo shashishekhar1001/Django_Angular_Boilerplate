@@ -1,6 +1,7 @@
-import { Component, inject, signal, OnInit } from '@angular/core';
+import { Component, inject, signal, computed, OnInit, OnDestroy } from '@angular/core';
 import { trigger, transition, style, animate, query } from '@angular/animations';
-import { Router, RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
+import { Router, RouterLink, RouterLinkActive, RouterOutlet, NavigationEnd, type Event } from '@angular/router';
+import { Subscription } from 'rxjs';
 import { ButtonModule } from 'primeng/button';
 
 const fadeSlide = trigger('routeAnimations', [
@@ -25,18 +26,42 @@ const fadeSlide = trigger('routeAnimations', [
     styleUrls: ['./admin-dashboard.component.css'],
     animations: [fadeSlide]
 })
-export class AdminDashboardComponent implements OnInit {
+export class AdminDashboardComponent implements OnInit, OnDestroy {
   private readonly router = inject(Router);
+  private readonly routerSubscription = new Subscription();
 
   readonly sidebarOpen = signal<boolean>(false);
+  readonly userManagementOpen = signal<boolean>(false);
+  readonly currentUrl = signal<string>('');
+  readonly isUserManagementChildActive = computed(() => {
+    const url = this.currentUrl();
+    return url.startsWith('/admin/users') || url.startsWith('/admin/roles') || url.startsWith('/admin/permissions');
+  });
   readonly reducedMotion = signal<boolean>(
     typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches
   );
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.currentUrl.set(this.router.url);
+    this.routerSubscription.add(
+      this.router.events.subscribe((event: Event) => {
+        if (event instanceof NavigationEnd) {
+          this.currentUrl.set(event.urlAfterRedirects || event.url);
+        }
+      })
+    );
+  }
+
+  ngOnDestroy(): void {
+    this.routerSubscription.unsubscribe();
+  }
 
   toggleSidebar(): void {
     this.sidebarOpen.update(v => !v);
+  }
+
+  toggleUserManagement(): void {
+    this.userManagementOpen.update(v => !v);
   }
 
   closeSidebar(): void {

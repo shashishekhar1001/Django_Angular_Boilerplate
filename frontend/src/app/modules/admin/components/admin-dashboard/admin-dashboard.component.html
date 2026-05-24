@@ -37,27 +37,44 @@
         </svg>
         <span>Dashboard</span>
       </a>
-      <a class="nav-item animate-nav-fade-in" routerLink="/admin/users" routerLinkActive="active" (click)="closeSidebar()">
-        <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
-          <path d="M13 15V13C13 11.8954 12.1046 11 11 11H4C2.89543 11 2 11.8954 2 13V15" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-          <circle cx="7.5" cy="5.5" r="3" stroke="currentColor" stroke-width="1.5"/>
-        </svg>
-        <span>Users</span>
-      </a>
-      <a class="nav-item animate-nav-fade-in" routerLink="/admin/roles" routerLinkActive="active" (click)="closeSidebar()">
-        <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
-          <path d="M9 17C13.4183 17 17 13.4183 17 9C17 4.58172 13.4183 1 9 1C4.58172 1 1 4.58172 1 9C1 13.4183 4.58172 17 9 17Z" stroke="currentColor" stroke-width="1.5"/>
-          <path d="M6 9L8 11L12 7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-        <span>Roles</span>
-      </a>
-      <a class="nav-item animate-nav-fade-in" routerLink="/admin/permissions" routerLinkActive="active" (click)="closeSidebar()">
-        <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
-          <rect x="2" y="8" width="14" height="9" rx="1.5" stroke="currentColor" stroke-width="1.5"/>
-          <path d="M5 8V5C5 3.34315 6.34315 2 8 2C9.65685 2 11 3.34315 11 5V8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-        </svg>
-        <span>Permissions</span>
-      </a>
+      <!-- User Management (collapsible) -->
+      <div class="nav-group">
+        <button class="nav-item nav-group-toggle animate-nav-fade-in" (click)="toggleUserManagement()" [class.active]="userManagementOpen() || isUserManagementChildActive()" [class.open]="userManagementOpen()">
+          <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+            <path d="M13 15V13C13 11.8954 12.1046 11 11 11H4C2.89543 11 2 11.8954 2 13V15" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+            <circle cx="7.5" cy="5.5" r="3" stroke="currentColor" stroke-width="1.5"/>
+          </svg>
+          <span>User Management</span>
+          <svg class="chevron" width="14" height="14" viewBox="0 0 14 14" fill="none">
+            <path d="M4 8L7 5L10 8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+        <div class="nav-subgroup" [class.open]="userManagementOpen()">
+          <div class="nav-subgroup-inner">
+            <a class="nav-item nav-sub-item" routerLink="/admin/users" routerLinkActive="active" (click)="closeSidebar()">
+              <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+                <path d="M13 15V13C13 11.8954 12.1046 11 11 11H4C2.89543 11 2 11.8954 2 13V15" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                <circle cx="7.5" cy="5.5" r="3" stroke="currentColor" stroke-width="1.5"/>
+              </svg>
+              <span>Users</span>
+            </a>
+            <a class="nav-item nav-sub-item" routerLink="/admin/roles" routerLinkActive="active" (click)="closeSidebar()">
+              <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+                <path d="M9 17C13.4183 17 17 13.4183 17 9C17 4.58172 13.4183 1 9 1C4.58172 1 1 4.58172 1 9C1 13.4183 4.58172 17 9 17Z" stroke="currentColor" stroke-width="1.5"/>
+                <path d="M6 9L8 11L12 7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+              <span>Roles</span>
+            </a>
+            <a class="nav-item nav-sub-item" routerLink="/admin/permissions" routerLinkActive="active" (click)="closeSidebar()">
+              <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+                <rect x="2" y="8" width="14" height="9" rx="1.5" stroke="currentColor" stroke-width="1.5"/>
+                <path d="M5 8V5C5 3.34315 6.34315 2 8 2C9.65685 2 11 3.34315 11 5V8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+              </svg>
+              <span>Permissions</span>
+            </a>
+          </div>
+        </div>
+      </div>
     </nav>
 
     <div class="sidebar-footer">
