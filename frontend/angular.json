@@ -28,11 +28,11 @@
               }
             ],
             "styles": [
-              "src/styles.css",
-              "src/app/design-tokens.css",
-              "src/app/animations.css",
-              "src/app/primeng-overrides.css",
-              "src/app/admin-list-styles.css"
+              "src/app/styles/styles.css",
+              "src/app/styles/design-tokens.css",
+              "src/app/styles/animations.css",
+              "src/app/styles/primeng-overrides.css",
+              "src/app/styles/admin-list-styles.css"
             ]
           },
           "configurations": {
