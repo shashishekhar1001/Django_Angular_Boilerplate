@@ -6,8 +6,8 @@ import { ButtonModule } from 'primeng/button';
 import { ToastModule } from 'primeng/toast';
 import { MessageService } from 'primeng/api';
 import { Router, RouterLink } from '@angular/router';
-import { AuthService } from '../../services/auth.service';
-import { extractApiErrors } from '../../utils/error-utils';
+import { AuthService } from '../../../services/auth.service';
+import { extractApiErrors } from '../../../utils/error-utils';
 
 @Component({
     selector: 'app-forgot-password',

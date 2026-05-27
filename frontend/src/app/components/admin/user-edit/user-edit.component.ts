@@ -9,8 +9,8 @@ import { MultiSelectModule } from 'primeng/multiselect';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { ToastModule } from 'primeng/toast';
 import { ConfirmationService, MessageService } from 'primeng/api';
-import { User, Role, PermissionGroup, AuthService } from '../../../../services/auth.service';
-import { extractApiErrors } from '../../../../utils/error-utils';
+import { User, Role, PermissionGroup, AuthService } from '../../../services/auth.service';
+import { extractApiErrors } from '../../../utils/error-utils';
 
 @Component({
     selector: 'app-user-edit',

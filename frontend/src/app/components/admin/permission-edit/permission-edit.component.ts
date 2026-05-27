@@ -7,8 +7,8 @@ import { InputTextModule } from 'primeng/inputtext';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { ToastModule } from 'primeng/toast';
 import { ConfirmationService, MessageService } from 'primeng/api';
-import { AuthService } from '../../../../services/auth.service';
-import { extractApiErrors } from '../../../../utils/error-utils';
+import { AuthService } from '../../../services/auth.service';
+import { extractApiErrors } from '../../../utils/error-utils';
 
 @Component({
     selector: 'app-permission-edit',

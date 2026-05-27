@@ -8,8 +8,8 @@ import { MultiSelectModule } from 'primeng/multiselect';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { ToastModule } from 'primeng/toast';
 import { ConfirmationService, MessageService } from 'primeng/api';
-import { Role, Permission, AuthService } from '../../../../services/auth.service';
-import { extractApiErrors } from '../../../../utils/error-utils';
+import { Role, Permission, AuthService } from '../../../services/auth.service';
+import { extractApiErrors } from '../../../utils/error-utils';
 
 @Component({
     selector: 'app-role-edit',

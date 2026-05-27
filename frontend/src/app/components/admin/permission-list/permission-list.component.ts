@@ -8,24 +8,24 @@ import { InputTextModule } from 'primeng/inputtext';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { ToastModule } from 'primeng/toast';
 import { ConfirmationService, MessageService } from 'primeng/api';
-import { Role, AuthService } from '../../../../services/auth.service';
-import { extractApiErrors } from '../../../../utils/error-utils';
+import { Permission, AuthService } from '../../../services/auth.service';
+import { extractApiErrors } from '../../../utils/error-utils';
 
 @Component({
-    selector: 'app-role-list',
+    selector: 'app-permission-list',
     imports: [FormsModule, TableModule, ButtonModule, InputTextModule, ConfirmDialogModule, ToastModule],
-    templateUrl: './role-list.component.html',
-    styleUrls: ['./role-list.component.css']
+    templateUrl: './permission-list.component.html',
+    styleUrls: ['./permission-list.component.css']
 })
-export class RoleListComponent implements OnInit {
+export class PermissionListComponent implements OnInit {
   private readonly router = inject(Router);
   private readonly authService = inject(AuthService);
   private readonly confirmationService = inject(ConfirmationService);
   private readonly messageService = inject(MessageService);
 
-  readonly roles = signal<Role[]>([]);
+  readonly permissions = signal<Permission[]>([]);
   readonly searchTerm = signal<string>('');
-  readonly filteredRoles = signal<Role[]>([]);
+  readonly filteredPermissions = signal<Permission[]>([]);
   readonly loading = signal<boolean>(false);
   readonly overlayState = signal<'hidden' | 'visible' | 'exiting'>('hidden');
   private _exitTimer: ReturnType<typeof setTimeout> | null = null;
@@ -35,7 +35,7 @@ export class RoleListComponent implements OnInit {
   @ViewChild(Table) private table!: Table;
 
   ngOnInit(): void {
-    this.loadRoles();
+    this.loadPermissions();
   }
 
   constructor() {
@@ -83,12 +83,12 @@ export class RoleListComponent implements OnInit {
     });
   }
 
-  private loadRoles(): void {
+  private loadPermissions(): void {
     this.loading.set(true);
-    this.authService.getRoles().subscribe({
-      next: (roles) => {
-        this.roles.set(roles);
-        this.filteredRoles.set(roles);
+    this.authService.getPermissions().subscribe({
+      next: (perms) => {
+        this.permissions.set(perms);
+        this.filteredPermissions.set(perms);
         this.loading.set(false);
       },
       error: (error) => {
@@ -101,32 +101,36 @@ export class RoleListComponent implements OnInit {
     });
   }
 
-  filterRoles(): void {
+  filterPermissions(): void {
     const term = this.searchTerm().toLowerCase();
-    const filtered = this.roles().filter((role) => role.name.toLowerCase().includes(term));
-    this.filteredRoles.set(filtered);
+    const filtered = this.permissions().filter(
+      (permission) =>
+        permission.name.toLowerCase().includes(term) ||
+        permission.codename.toLowerCase().includes(term),
+    );
+    this.filteredPermissions.set(filtered);
     if (this.table) {
       this.table.first = 0;
     }
   }
 
-  addRole(): void {
-    this.router.navigate(['/admin/roles/new']);
+  addPermission(): void {
+    this.router.navigate(['/admin/permissions/new']);
   }
 
-  editRole(role: Role): void {
-    this.router.navigate(['/admin/roles', role.id, 'edit']);
+  editPermission(permission: Permission): void {
+    this.router.navigate(['/admin/permissions', permission.id, 'edit']);
   }
 
-  deleteRole(role: Role): void {
+  deletePermission(permission: Permission): void {
     this.confirmationService.confirm({
-      message: `Are you sure you want to delete role "${role.name}"?`,
-      header: 'Delete Role',
+      message: `Are you sure you want to delete permission "${permission.name}"?`,
+      header: 'Delete Permission',
       icon: 'pi pi-exclamation-triangle',
       accept: () => {
-        this.authService.deleteRole(role.id).subscribe({
+        this.authService.deletePermission(permission.id).subscribe({
           next: () => {
-            this.loadRoles();
+            this.loadPermissions();
           },
           error: (error) => {
             const messages = extractApiErrors(error);

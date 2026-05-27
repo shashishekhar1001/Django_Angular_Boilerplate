@@ -8,24 +8,31 @@ import { InputTextModule } from 'primeng/inputtext';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { ToastModule } from 'primeng/toast';
 import { ConfirmationService, MessageService } from 'primeng/api';
-import { Permission, AuthService } from '../../../../services/auth.service';
-import { extractApiErrors } from '../../../../utils/error-utils';
+import { User, AuthService } from '../../../services/auth.service';
+import { extractApiErrors } from '../../../utils/error-utils';
 
 @Component({
-    selector: 'app-permission-list',
-    imports: [FormsModule, TableModule, ButtonModule, InputTextModule, ConfirmDialogModule, ToastModule],
-    templateUrl: './permission-list.component.html',
-    styleUrls: ['./permission-list.component.css']
+    selector: 'app-user-list',
+    imports: [
+    FormsModule,
+    TableModule,
+    ButtonModule,
+    InputTextModule,
+    ConfirmDialogModule,
+    ToastModule
+],
+    templateUrl: './user-list.component.html',
+    styleUrls: ['./user-list.component.css']
 })
-export class PermissionListComponent implements OnInit {
+export class UserListComponent implements OnInit {
   private readonly router = inject(Router);
   private readonly authService = inject(AuthService);
   private readonly confirmationService = inject(ConfirmationService);
   private readonly messageService = inject(MessageService);
 
-  readonly permissions = signal<Permission[]>([]);
+  readonly users = signal<User[]>([]);
   readonly searchTerm = signal<string>('');
-  readonly filteredPermissions = signal<Permission[]>([]);
+  readonly filteredUsers = signal<User[]>([]);
   readonly loading = signal<boolean>(false);
   readonly overlayState = signal<'hidden' | 'visible' | 'exiting'>('hidden');
   private _exitTimer: ReturnType<typeof setTimeout> | null = null;
@@ -35,7 +42,7 @@ export class PermissionListComponent implements OnInit {
   @ViewChild(Table) private table!: Table;
 
   ngOnInit(): void {
-    this.loadPermissions();
+    this.loadUsers();
   }
 
   constructor() {
@@ -83,12 +90,12 @@ export class PermissionListComponent implements OnInit {
     });
   }
 
-  private loadPermissions(): void {
+  private loadUsers(): void {
     this.loading.set(true);
-    this.authService.getPermissions().subscribe({
-      next: (perms) => {
-        this.permissions.set(perms);
-        this.filteredPermissions.set(perms);
+    this.authService.getUsers().subscribe({
+      next: (users) => {
+        this.users.set(users);
+        this.filteredUsers.set(users);
         this.loading.set(false);
       },
       error: (error) => {
@@ -101,36 +108,45 @@ export class PermissionListComponent implements OnInit {
     });
   }
 
-  filterPermissions(): void {
+  filterUsers(): void {
     const term = this.searchTerm().toLowerCase();
-    const filtered = this.permissions().filter(
-      (permission) =>
-        permission.name.toLowerCase().includes(term) ||
-        permission.codename.toLowerCase().includes(term),
+    const filtered = this.users().filter(
+      (user) =>
+        user.email.toLowerCase().includes(term) ||
+        user.first_name.toLowerCase().includes(term) ||
+        user.last_name.toLowerCase().includes(term),
     );
-    this.filteredPermissions.set(filtered);
+    this.filteredUsers.set(filtered);
     if (this.table) {
       this.table.first = 0;
     }
   }
 
-  addPermission(): void {
-    this.router.navigate(['/admin/permissions/new']);
+  hasRole(user: User, roleName: string): boolean {
+    return user.roles.some((role: any) => role.name === roleName);
   }
 
-  editPermission(permission: Permission): void {
-    this.router.navigate(['/admin/permissions', permission.id, 'edit']);
+  getPrimaryRole(user: User): string {
+    return user.roles.length > 0 ? user.roles[0].name : 'No Role';
   }
 
-  deletePermission(permission: Permission): void {
+  addUser(): void {
+    this.router.navigate(['/admin/users/new']);
+  }
+
+  editUser(user: User): void {
+    this.router.navigate(['/admin/users', user.id, 'edit']);
+  }
+
+  deleteUser(user: User): void {
     this.confirmationService.confirm({
-      message: `Are you sure you want to delete permission "${permission.name}"?`,
-      header: 'Delete Permission',
+      message: `Are you sure you want to delete user "${user.first_name} ${user.last_name}" (${user.email})?`,
+      header: 'Delete User',
       icon: 'pi pi-exclamation-triangle',
       accept: () => {
-        this.authService.deletePermission(permission.id).subscribe({
+        this.authService.deleteUser(user.id).subscribe({
           next: () => {
-            this.loadPermissions();
+            this.loadUsers();
           },
           error: (error) => {
             const messages = extractApiErrors(error);

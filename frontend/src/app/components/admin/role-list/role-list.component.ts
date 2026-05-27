@@ -8,31 +8,24 @@ import { InputTextModule } from 'primeng/inputtext';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { ToastModule } from 'primeng/toast';
 import { ConfirmationService, MessageService } from 'primeng/api';
-import { User, AuthService } from '../../../../services/auth.service';
-import { extractApiErrors } from '../../../../utils/error-utils';
+import { Role, AuthService } from '../../../services/auth.service';
+import { extractApiErrors } from '../../../utils/error-utils';
 
 @Component({
-    selector: 'app-user-list',
-    imports: [
-    FormsModule,
-    TableModule,
-    ButtonModule,
-    InputTextModule,
-    ConfirmDialogModule,
-    ToastModule
-],
-    templateUrl: './user-list.component.html',
-    styleUrls: ['./user-list.component.css']
+    selector: 'app-role-list',
+    imports: [FormsModule, TableModule, ButtonModule, InputTextModule, ConfirmDialogModule, ToastModule],
+    templateUrl: './role-list.component.html',
+    styleUrls: ['./role-list.component.css']
 })
-export class UserListComponent implements OnInit {
+export class RoleListComponent implements OnInit {
   private readonly router = inject(Router);
   private readonly authService = inject(AuthService);
   private readonly confirmationService = inject(ConfirmationService);
   private readonly messageService = inject(MessageService);
 
-  readonly users = signal<User[]>([]);
+  readonly roles = signal<Role[]>([]);
   readonly searchTerm = signal<string>('');
-  readonly filteredUsers = signal<User[]>([]);
+  readonly filteredRoles = signal<Role[]>([]);
   readonly loading = signal<boolean>(false);
   readonly overlayState = signal<'hidden' | 'visible' | 'exiting'>('hidden');
   private _exitTimer: ReturnType<typeof setTimeout> | null = null;
@@ -42,7 +35,7 @@ export class UserListComponent implements OnInit {
   @ViewChild(Table) private table!: Table;
 
   ngOnInit(): void {
-    this.loadUsers();
+    this.loadRoles();
   }
 
   constructor() {
@@ -90,12 +83,12 @@ export class UserListComponent implements OnInit {
     });
   }
 
-  private loadUsers(): void {
+  private loadRoles(): void {
     this.loading.set(true);
-    this.authService.getUsers().subscribe({
-      next: (users) => {
-        this.users.set(users);
-        this.filteredUsers.set(users);
+    this.authService.getRoles().subscribe({
+      next: (roles) => {
+        this.roles.set(roles);
+        this.filteredRoles.set(roles);
         this.loading.set(false);
       },
       error: (error) => {
@@ -108,45 +101,32 @@ export class UserListComponent implements OnInit {
     });
   }
 
-  filterUsers(): void {
+  filterRoles(): void {
     const term = this.searchTerm().toLowerCase();
-    const filtered = this.users().filter(
-      (user) =>
-        user.email.toLowerCase().includes(term) ||
-        user.first_name.toLowerCase().includes(term) ||
-        user.last_name.toLowerCase().includes(term),
-    );
-    this.filteredUsers.set(filtered);
+    const filtered = this.roles().filter((role) => role.name.toLowerCase().includes(term));
+    this.filteredRoles.set(filtered);
     if (this.table) {
       this.table.first = 0;
     }
   }
 
-  hasRole(user: User, roleName: string): boolean {
-    return user.roles.some((role: any) => role.name === roleName);
+  addRole(): void {
+    this.router.navigate(['/admin/roles/new']);
   }
 
-  getPrimaryRole(user: User): string {
-    return user.roles.length > 0 ? user.roles[0].name : 'No Role';
+  editRole(role: Role): void {
+    this.router.navigate(['/admin/roles', role.id, 'edit']);
   }
 
-  addUser(): void {
-    this.router.navigate(['/admin/users/new']);
-  }
-
-  editUser(user: User): void {
-    this.router.navigate(['/admin/users', user.id, 'edit']);
-  }
-
-  deleteUser(user: User): void {
+  deleteRole(role: Role): void {
     this.confirmationService.confirm({
-      message: `Are you sure you want to delete user "${user.first_name} ${user.last_name}" (${user.email})?`,
-      header: 'Delete User',
+      message: `Are you sure you want to delete role "${role.name}"?`,
+      header: 'Delete Role',
       icon: 'pi pi-exclamation-triangle',
       accept: () => {
-        this.authService.deleteUser(user.id).subscribe({
+        this.authService.deleteRole(role.id).subscribe({
           next: () => {
-            this.loadUsers();
+            this.loadRoles();
           },
           error: (error) => {
             const messages = extractApiErrors(error);
